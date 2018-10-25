@@ -1,0 +1,52 @@
+{#This is the products list page...the main page#}
+
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <ul class="nav nav-pills">      <!–-These are the category pills-->
+      <li class="nav-item" style="margin: 20px"{% if not category %} class="active"{% endif %}><a class="nav-link active" href="{% url 'shop:product_list' %}">All</a></li>
+        {% for c in categories %}
+            <li class="nav-item" style="margin: 20px" {% if category.slug == c.slug %} class="active"{% endif %}>
+                <a class="nav-link active" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </li>
+            {% endfor %}
+    </ul>
+
+
+   <div class="container-fluid">
+      <div class="row" style="margin-top: 6%">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 10%">Picture</th> <!--This is the table header-->
+              <th scope="col" style="width: 10%">Model</th>
+              <th scope="col" style="width: 10%">Material</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+{#              <th scope="row">1</th>#}
+                {% for product in products %}       <!--Looping through the products to list all of the products-->
+                    <td><a href="{{ product.get_absolute_url }}"><img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 100px; width: 100px; object-fit: cover"></a></td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category }}</td>
+              <td>${{ product.price }}</td>
+            </tr>
+
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+{% endblock %}

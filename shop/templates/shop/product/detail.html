@@ -1,0 +1,23 @@
+{#Detail page when an item is clicked on#}
+
+{% extends 'shop/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div style="margin:100px">
+<img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 400px; width: auto;float: left">
+<br><br><h3>{{ product.name }}</h3>
+<h6><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h6>
+    <b><p class="text-muted">${{ product.price }}</p></b>
+<form action="{% url "cart:cart_add" product.id %}" method="post">      <!--Added form that will post to add to the cart-->
+{% csrf_token %}
+{{ cart_product_form }}
+<br><input type="submit" value="add to cart" class="btn btn-primary">
+</form>
+<br><p>{{ product.description|safe|linebreaksbr }}</p>
+</div>
+
+
+{% endblock %}

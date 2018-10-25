@@ -1,0 +1,24 @@
+{% load static %}
+
+<nav class="navbar navbar-light bg-light" style="height: 110px">
+  <a class="navbar-brand" href="{% url 'shop:product_list' %}">
+    <img src="C:\Users\Jeff\PycharmProjects\retailproject\shop\static\img\default.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <h1>Spatula City<h1>
+  </a>
+  <div class="container" style="float: right">          <!--The shopping cart displays here in the navbar-->
+    <div class="row" style="margin-top: 6%">
+         <button class="btn btn-info pull-right">
+            {% with totail_items=cart|length %}
+                {% if cart|length > 0 %}
+                    My Shopping Order:
+                    <a href="{% url "cart:cart_detail" %}" style="color: #ffffff">
+                        {{ totail_items }} item{{ totail_items|pluralize}}, ${{ cart.get_total_price }}
+                    </a>
+                    {% else %}
+                    Your cart is empty.
+                {% endif %}
+            {% endwith %}
+         </button>
+    </div>
+   </div>
+</nav>
