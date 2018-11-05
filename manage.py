@@ -2,6 +2,9 @@
 import os
 import sys
 
+# Done with the help of the tutorial from
+# https://github.com/muvatech/Shopping-Cart-Using-Django-2.0-and-Python-3.6
+
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'retailproject.settings')
     try:
