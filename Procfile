@@ -1,1 +1,1 @@
-web: gunicorn retailproject:app
+web: gunicorn app:app
